@@ -1,1 +1,1 @@
-web:gunicorn pratiksingh.wsgi
+web:gunicorn portfolio.wsgi
