@@ -157,3 +157,5 @@ cloudinary.config(
     api_secret="qQmoLBbwVgDiB4GvDnJCeY4HKpA",
     secure=True
 )
+
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
