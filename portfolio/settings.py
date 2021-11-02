@@ -14,6 +14,10 @@ import django_heroku
 from pathlib import Path
 import os
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'ckeditor',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -137,12 +142,18 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+#cloudinary
+cloudinary.config(
+    cloud_name="dec50671r",
+    api_key="824485829839315",
+    api_secret="qQmoLBbwVgDiB4GvDnJCeY4HKpA",
+    secure=True
+)

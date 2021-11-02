@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from ckeditor.fields import RichTextField
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -13,7 +14,7 @@ class Skill(models.Model):
 
     name = models.CharField(max_length=20, blank=True, null=True)
     score = models.IntegerField(default=80, blank=True, null=True)
-    image = models.FileField(blank=True, null=True, upload_to='skills')
+    image = CloudinaryField(blank=True, null=True)
     is_key_skill = models.BooleanField(default=False)
 
     def __str__(self):
@@ -27,9 +28,9 @@ class UserProfile(models.Model):
         verbose_name = 'User Profile'
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(blank=True, null=True, upload_to="avatar")
+    avatar = CloudinaryField(blank=True, null=True)
     title = models.CharField(max_length=200, blank=True, null=True)
-    bio = models.TextField(blank=True, null=True)
+    bio = models.TextField('image' ,blank=True, null=True)
     skills = models.ManyToManyField(Skill, blank=True)
     cv = models.FileField(blank=True, null=True, upload_to="cv")
 
@@ -59,7 +60,7 @@ class Testimonial(models.Model):
         verbose_name = 'Testimonial'
         ordering = ["name"]
 
-    thumbnail = models.ImageField(blank=True, null=True, upload_to="testimonials")
+    thumbnail = CloudinaryField(blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
     role = models.CharField(max_length=200, blank=True, null=True)
     quote = models.TextField(max_length=500, blank=True, null=True)
@@ -76,7 +77,7 @@ class Media(models.Model):
         verbose_name = 'Media'
         ordering = ["name"]
 	
-    image = models.ImageField(blank=True, null=True, upload_to="media")
+    image = CloudinaryField(blank=True, null=True)
     url = models.URLField(blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
     is_image = models.BooleanField(default=True)
@@ -99,7 +100,7 @@ class Portfolio(models.Model):
     name = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=500, blank=True, null=True)
     body = RichTextField(blank=True, null=True)
-    image = models.ImageField(blank=True, null=True, upload_to="portfolio")
+    image = CloudinaryField(blank=True, null=True)
     slug = models.SlugField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
@@ -128,7 +129,7 @@ class Blog(models.Model):
     description = models.CharField(max_length=500, blank=True, null=True)
     body = RichTextField(blank=True, null=True)
     slug = models.SlugField(null=True, blank=True)
-    image = models.ImageField(blank=True, null=True, upload_to="blog")
+    image = CloudinaryField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
